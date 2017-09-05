@@ -50,7 +50,7 @@
   });
 
   wizardName.addEventListener('keydown', function (evt) {  // если фокус находится на форме ввода имени, то 'Esc' не закрывает диалог
-    window.util.isEscEvent(evt, evt.stopPropagation);
+    window.util.isEscEvent(evt, evt.stopPropagation());
   });
 
   // обработчики нажатий на элементы персонажа
