@@ -62,9 +62,10 @@
       draggedItem = evt.target;
       evt.dataTransfer.setData('text/plain', evt.target.alt);
     }
-    for (var i = 0; i < inventoryCells.length; i++) {
-      inventoryCells[i].style = 'outline: 2px dashed red';
-    }
+
+    inventoryCells.forEach(function (cell) {
+      cell.style = 'outline: 2px dashed red';
+    });
   });
 
   inventory.addEventListener('dragover', function (evt) {
@@ -76,17 +77,19 @@
     evt.target.style.backgroundColor = '';
     evt.target.appendChild(draggedItem);
     evt.preventDefault();
-    for (var i = 0; i < inventoryCells.length; i++) {
-      inventoryCells[i].style = '';
-    }
+
+    inventoryCells.forEach(function (cell) {
+      cell.style = '';
+    });
   });
 
   inventory.addEventListener('dragenter', function (evt) {
     evt.target.style.backgroundColor = 'yellow';
     evt.preventDefault();
-    for (var i = 0; i < inventoryCells.length; i++) {
-      inventoryCells[i].style = 'outline: 2px dashed red';
-    }
+
+    inventoryCells.forEach(function (cell) {
+      cell.style = 'outline: 2px dashed red';
+    });
   });
 
   inventory.addEventListener('dragleave', function (evt) {
