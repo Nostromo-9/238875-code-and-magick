@@ -54,35 +54,42 @@
 
   var shopElement = setup.querySelector('.setup-artifacts-shop');
   var draggedItem = null;
-  var artifactsElement = setup.querySelector('.setup-artifacts');
+  var inventory = setup.querySelector('.setup-artifacts');
+  var inventoryCells = inventory.querySelectorAll('.setup-artifacts-cell');
 
   shopElement.addEventListener('dragstart', function (evt) {
     if (evt.target.tagName.toLowerCase() === 'img') {
       draggedItem = evt.target;
       evt.dataTransfer.setData('text/plain', evt.target.alt);
     }
-    artifactsElement.querySelectorAll('.setup-artifacts-cell').style.outline = '2px dashed red';
+    for (var i = 0; i < inventoryCells.length; i++) {
+      inventoryCells[i].style = 'outline: 2px dashed red';
+    }
   });
 
-  artifactsElement.addEventListener('dragover', function (evt) {
+  inventory.addEventListener('dragover', function (evt) {
     evt.preventDefault();
     return false;
   });
 
-  artifactsElement.addEventListener('drop', function (evt) {
+  inventory.addEventListener('drop', function (evt) {
     evt.target.style.backgroundColor = '';
     evt.target.appendChild(draggedItem);
     evt.preventDefault();
-
-    artifactsElement.querySelectorAll('.setup-artifacts-cell').style.outline = '';
+    for (var i = 0; i < inventoryCells.length; i++) {
+      inventoryCells[i].style = '';
+    }
   });
 
-  artifactsElement.addEventListener('dragenter', function (evt) {
+  inventory.addEventListener('dragenter', function (evt) {
     evt.target.style.backgroundColor = 'yellow';
     evt.preventDefault();
+    for (var i = 0; i < inventoryCells.length; i++) {
+      inventoryCells[i].style = 'outline: 2px dashed red';
+    }
   });
 
-  artifactsElement.addEventListener('dragleave', function (evt) {
+  inventory.addEventListener('dragleave', function (evt) {
     evt.target.style.backgroundColor = '';
     evt.preventDefault();
   });
