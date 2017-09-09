@@ -52,6 +52,51 @@
   similarListElement.appendChild(fillFragment(wizards));
   setup.querySelector('.setup-similar').classList.remove('hidden');
 
+  var shopElement = setup.querySelector('.setup-artifacts-shop');
+  var draggedItem = null;
+  var inventory = setup.querySelector('.setup-artifacts');
+  var inventoryCells = inventory.querySelectorAll('.setup-artifacts-cell');
+
+  shopElement.addEventListener('dragstart', function (evt) {
+    if (evt.target.tagName.toLowerCase() === 'img') {
+      draggedItem = evt.target;
+      evt.dataTransfer.setData('text/plain', evt.target.alt);
+    }
+
+    inventoryCells.forEach(function (cell) {
+      cell.style = 'outline: 2px dashed red';
+    });
+  });
+
+  inventory.addEventListener('dragover', function (evt) {
+    evt.preventDefault();
+    return false;
+  });
+
+  inventory.addEventListener('drop', function (evt) {
+    evt.target.style.backgroundColor = '';
+    evt.target.appendChild(draggedItem);
+    evt.preventDefault();
+
+    inventoryCells.forEach(function (cell) {
+      cell.style = '';
+    });
+  });
+
+  inventory.addEventListener('dragenter', function (evt) {
+    evt.target.style.backgroundColor = 'yellow';
+    evt.preventDefault();
+
+    inventoryCells.forEach(function (cell) {
+      cell.style = 'outline: 2px dashed red';
+    });
+  });
+
+  inventory.addEventListener('dragleave', function (evt) {
+    evt.target.style.backgroundColor = '';
+    evt.preventDefault();
+  });
+
   window.setup = {
     COAT_COLORS: ['rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(146, 100, 161)', 'rgb(56, 159, 117)', 'rgb(215, 210, 55)', 'rgb(0, 0, 0)'],
     EYES_COLORS: ['black', 'red', 'blue', 'yellow', 'green'],
