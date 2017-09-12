@@ -1,10 +1,12 @@
 'use strict';
 
 (function () {
-  function openPopup() {  // функция открытия окна персонажа с обработчиком нажатия 'Esc'
+  // функция открытия окна персонажа с обработчиком нажатия 'Esc'
+  function openPopup() {
     setup.classList.remove('hidden');
     document.addEventListener('keydown', onPopupEscPress);
   }
+
   // функция закрытия окна персонажа с удалением обработчика нажатия 'Esc' и обновлением начальных координат окна диалога
   function closePopup() {
     setup.classList.add('hidden');
@@ -15,7 +17,8 @@
     document.removeEventListener('keydown', onPopupEscPress);
   }
 
-  function onPopupEscPress(evt) {  // функция обработки нажатия 'Esc' при открытом окне персонажа
+  // функция обработки нажатия 'Esc' при открытом окне персонажа
+  function onPopupEscPress(evt) {
     window.util.isEscEvent(evt, closePopup);
   }
 
@@ -24,11 +27,7 @@
   var setupClose = setup.querySelector('.setup-close');
   var setupSubmit = setup.querySelector('.setup-submit');
 
-  var wizardCoat = setup.querySelector('.wizard-coat');
-  var wizardEyes = setup.querySelector('.wizard-eyes');
-  var wizardFireball = setup.querySelector('.setup-fireball-wrap');
   var wizardName = setup.querySelector('.setup-user-name');
-
   var dialogHandle = setup.querySelector('.setup-user-pic');
 
   setupOpen.addEventListener('click', function () {
@@ -55,24 +54,13 @@
     window.util.isEnterEvent(evt, closePopup);
   });
 
-  wizardName.addEventListener('keydown', function (evt) {  // если фокус находится на форме ввода имени, то 'Esc' не закрывает диалог
+  // если фокус находится на форме ввода имени, то 'Esc' не закрывает диалог
+  wizardName.addEventListener('keydown', function (evt) {
     window.util.isEscEvent(evt, evt.stopPropagation());
   });
 
-  // обработчики нажатий на элементы персонажа
-  wizardCoat.addEventListener('click', function () {
-    wizardCoat.style.fill = window.setup.randomAttribute(window.setup.COAT_COLORS);
-  });
-
-  wizardEyes.addEventListener('click', function () {
-    wizardEyes.style.fill = window.setup.randomAttribute(window.setup.EYES_COLORS);
-  });
-
-  wizardFireball.addEventListener('click', function () {
-    wizardFireball.style.background = window.setup.randomAttribute(window.setup.FIREBALL_COLORS);
-  });
-
-  dialogHandle.addEventListener('mousedown', function (evt) {  // обработчик перетаскивания окна диалога
+  // обработчик перетаскивания окна диалога
+  dialogHandle.addEventListener('mousedown', function (evt) {
     evt.preventDefault();
 
     var startCoords = {
