@@ -74,15 +74,15 @@
 
   // обработчики нажатий на элементы персонажа с использованием callback-функций
   wizardCoat.addEventListener('click', function () {
-    window.colorize(fillElement(wizardCoat, randomAttribute(COAT_COLORS)));
+    window.colorize(wizardCoat, randomAttribute(COAT_COLORS), fillElement);
   });
 
   wizardEyes.addEventListener('click', function () {
-    window.colorize(fillElement(wizardEyes, randomAttribute(EYES_COLORS)));
+    window.colorize(wizardEyes, randomAttribute(EYES_COLORS), fillElement);
   });
 
   wizardFireball.addEventListener('click', function () {
-    window.colorize(changeElementBackground(wizardFireball, randomAttribute(FIREBALL_COLORS)));
+    window.colorize(wizardFireball, randomAttribute(FIREBALL_COLORS), changeElementBackground);
   });
 
   // обработчики drag-n-drop'а
